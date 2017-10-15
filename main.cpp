@@ -191,8 +191,6 @@ void read(int a[4][4])
 
 #include <iostream>
 using namespace std;
-//выход на любую клавишу кроме исходных 
-//l работает ка сдвиг вправо , предположил что в усливие опечатка 
 int sdvig( int a[4][4])
 {
 	char op ;
@@ -222,10 +220,11 @@ int sdvig( int a[4][4])
 			print(a);
 			cout << endl;
 			break;
-		default:
-			cout << "enter error " << endl;
+		case 'q':
 			system("pause");
 			return -1;
+		default:
+			cout << "enter error " << "new op= " << endl;
 		}
 	}
 }
