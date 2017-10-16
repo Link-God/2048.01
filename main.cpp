@@ -1,6 +1,4 @@
 #include"stdafx.h"
-static bool prov_0 = false;
-static bool lose = false;
 void sort_down(int a[4][4])
 {
 	for (int j = 0; j < 4; j++)
@@ -31,7 +29,7 @@ void sort_up(int a[4][4])
 		{
 			if (a[i][j] == 0)
 			{
-				for (int k = i + 1; k < 4; k++)
+				for (int k = i+1; k < 4; k++)
 				{
 					if (a[k][j] != 0)
 					{
@@ -159,41 +157,9 @@ void left_1(int a[4][4])
 	sort_left(a);
 }
 
-#include <iostream>
-#include <iomanip>h
-using namespace std;
-
-void print(int a[4][4])
-{
-	for (int i = 0; i < 4; i++)
-	{
-		cout << endl;
-		for (int j = 0; j < 4; j++)
-		{
-			if (a[i][j] == 0) cout<< setw(4) << "*" ; 
-			else
-			{
-				 cout << setw(4) << a[i][j] ; 
-			}
-		}
-	}
-	cout << endl;
-}
-
-void new_null(int a[4][4])
-{
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			a[i][j] = 0;
-		}
-	}
-}
-
 bool proverka(int a[4][4])
 {
-	int k=0;
+	int k = 0;
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -203,75 +169,86 @@ bool proverka(int a[4][4])
 	}
 	if (k == 0)
 	{
-		prov_0 = true;
 		return true;
 	}
 	else return false;
 }
 
 #include <iostream>
+#include <iomanip>h
 using namespace std;
-int rand_1(int a[4][4])
+void print(int a[4][4])
 {
-	int i, j;
-	i = rand() % 4;
-	j = rand() % 4;
-	if (proverka(a) && prov_0)
+	for (int i = 0; i < 4; i++)
 	{
-		cout << "lose" << endl;
-		lose = true;
-		system("pause");
-		return -1;
-	}
-	else 
-	{
-		if (a[i][j] != 0) rand_1(a);
-		else
+		cout << endl;
+		for (int j = 0; j < 4; j++)
 		{
-			int ran = rand() % 10;
-			if (ran < 8) a[i][j] = 2;
-			else a[i][j] = 4;
+			if (a[i][j] == 0) cout << setw(4) << "*";
+			else
+			{
+				cout << setw(4) << a[i][j];
+			}
 		}
-		return 1;
 	}
+	cout << endl;
 }
 
 #include <iostream>
 using namespace std;
-int sdvig(int a[4][4])
+void read(int a[4][4])
 {
-	char op;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+}
+
+int lose(int a[4][4],bool l)
+{
+	if (proverka(a) )
+	{
+		cout << "lose" << endl;
+		l = true;
+		system("pause");
+		return -1;
+	}
+}
+#include <iostream>
+using namespace std;
+int sdvig( int a[4][4])
+{
+	bool lose1 = false;
+	char op ;
 	while (true)
 	{
-	//	cin.get(); переход на другую строку сделал в print
+		//cin.get();
+		lose(a,lose1);
+		if (lose1) break;
 		cin >> op;
 		switch (op)
 		{
 		case 'j':
 			down(a);
-			rand_1(a);
-			print(a) ;
-			if (lose) return -1;
+			print(a);
 			cout << endl;
 			break;
 		case 'k':
 			up(a);
-			rand_1(a);
 			print(a);
-			if (lose) return -1;
 			cout << endl;
 			break;
 		case 'h':
 			left_1(a);
-			rand_1(a);
 			print(a);
 			cout << endl;
 			break;
 		case 'l':
 			right_1(a);
-			rand_1(a);
 			print(a);
-			if (lose) return -1;
 			cout << endl;
 			break;
 		case 'q':
@@ -284,15 +261,10 @@ int sdvig(int a[4][4])
 }
 
 #include <iostream>
-#include<ctime>
-#include <cstdlib>
 int main()
 {
 	int matrix[4][4];
-	srand(time(0));
-	new_null(matrix);
-	rand_1(matrix); rand_1(matrix); rand_1(matrix);
-	print(matrix);
+	read(matrix);
 	sdvig(matrix);
 	return 0;
 }
