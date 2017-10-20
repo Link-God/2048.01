@@ -207,26 +207,25 @@ void read(int a[4][4])
 	}
 }
 
-int lose(int a[4][4],bool l)
+void lose(int a[4][4],bool l)
 {
 	if (proverka(a) )
 	{
 		cout << "lose" << endl;
 		l = true;
 		system("pause");
-		return -1;
 	}
 }
 #include <iostream>
 using namespace std;
-int sdvig( int a[4][4])
+void sdvig( int a[4][4])
 {
 	bool lose1 = false;
 	char op ;
-	while (true)
+	bool q=true;
+	while (q )
 	{
-		//cin.get();
-		lose(a,lose1);
+		lose(a,&lose1);
 		if (lose1) break;
 		cin >> op;
 		switch (op)
@@ -253,7 +252,7 @@ int sdvig( int a[4][4])
 			break;
 		case 'q':
 			system("pause");
-			return -1;
+			q = false;
 		default:
 			cout << "enter error " << "new op= " << endl;
 		}
